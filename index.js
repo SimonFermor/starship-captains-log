@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 var mysql = require('mysql');
 
 if (app.get('port') !== 5000) {
-	var connection = mysql.createConnection(process.env.JAWSDB_URL);
+	var connection = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
 }
 else {
 	const fs = require('fs');
