@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+
+  <style type="text/css">
+  <!--
+  body {
+  background-image: url(http://ontherocks.ie/wp-content/uploads/2015/09/space-257-eso-nebula_70254_600x450.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  }
+  -->
+  </style>
+</head>
+
+<body>
+
+<% include ../partials/nav.ejs %>
+
+<div class="container">
+<h2>Starship Captain's Log</h2>
+
+<div class="table-responsive">
+
+<table class="table table-striped">
+
+<thead>
+	<th>Stardate</th>
+	<th>Title</th>
+	<th>Summary</th>
+	<th>Note</th>
+</thead>
+
+<tbody>
+
+<% note_rows.forEach(function(r) { %>
+	<tr>
+  	<td><%= dateFormat(r.created_at) %></td>
+  	<td><%= r.title %></td>
+  	<td><%= r.summary %></td>
+  	<td><%= r.note %></td>
+	</tr>
+<% }); %>
+
+<tr>
+<form action="/" method="post">
+  <td></td>
+	<td><input name="title" type="text" class="form-control" placeholder="Title"></input></td>
+	<td><input name="summary" type="text" class="form-control" placeholder="Summary of note"></input></td>
+	<td><textarea name="note" id="note" class="form-control" placeholder="Note..."></textarea></td>
+	<td><input type="submit" value="Add New"></td>
+</form>
+</tr>
+
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>

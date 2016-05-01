@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+
+  <style type="text/css">
+  <!--
+  body {
+  background-image: url();
+  background-repeat: no-repeat;
+  background-size: 100%;
+  color: green;
+  }
+  h1 { font-size: 1.5em;
+  }
+  tr {
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-collapse: collapse;
+}​
+  -->
+  </style>
+  <style type="text/css">
+  <!--
+  body {
+  background-image: url(https://mthupp.files.wordpress.com/2013/09/starry-night-871287410454umth.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  }
+  -->
+  </style>
+</head>
+
+<body>
+
+<% include ../partials/nav.ejs %>
+
+<div class="container">
+<table style="width: 100%;">
+  <tr>
+    <td><h2>Captain Arthur's Starship Log</h2></td>
+    <td style="text-align: right;">
+      Stardate: <%= dateFormat(note_rows[0].created_at) %><br>
+      Starlog ID#: <%= note_rows[0].note_id %>
+    </td>
+  </tr>
+</table>
+
+<div class="table-responsive">
+<table>
+    <tr><td style="font-weight: bold;" colspan="2"><h3>Area of Investigation: <%= note_rows[0].title %></h3></td></tr>
+    <tr><td style="font-weight: bold; width: 150px;">Summary:</td><td> <%=note_rows[0].summary %></td></tr>
+    <tr>
+      <td style="font-weight: bold; vertical-align: top;">Detail Findings:</td>
+      <td style="vertical-align: top;"> <%- note %></td>
+    </tr>
+    <tr><td style="font-weight: bold;">Keywords:</td>
+      <td>-
+        <% keyword_rows.forEach(function(r) { %>
+          <%= r.keyword %> -
+        <% }); %>
+      </td>
+    </tr>
+</table>
+
+<!-- to be modified so that form can be used to edit
+<tr>
+<form action="/" method="post">
+  <td></td>
+	<td><input name="title" type="text" class="form-control" placeholder="Title"></input></td>
+	<td><input name="summary" type="text" class="form-control" placeholder="Summary of note"></input></td>
+	<td><textarea name="note" id="note" class="form-control" placeholder="Note..."></textarea></td>
+	<td><input type="submit" value="Add New"></td>
+</form>
+</tr>
+
+</tbody>
+</table>
+-->
+
+</div>
+
+</div>
+
+</body>
+</html>
