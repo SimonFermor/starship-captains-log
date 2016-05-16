@@ -1,3 +1,4 @@
+.env
 npm-debug.log
 password.txt
 config/

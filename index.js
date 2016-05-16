@@ -7,6 +7,7 @@ var app = express();
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/node_modules'));
 // app.use(favicon(__dirname + '/public/favicon.ico'));
 
 // Views is directory for all template files
@@ -48,6 +49,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 
 // Express helper functions
 app.locals.dateFormat = function(obj) { return moment(obj).format("dddd, MMMM Do"); };
+// app.locals.markdown = function(obj) { return markdown.toHTML(obj); };
 
 // Default page
 app.get('/', function(request, response) {
@@ -63,7 +65,7 @@ app.get('/one_note/', function(request, response) {
 		//var note = results[0][0];
 		//console.log(note.note);
 		query_note_keywords(request.param('note_id'), note_rows, function(err, note_rows, keyword_rows) {
-		response.render('pages/one_note',	{note_rows: note_rows, note: markdown.toHTML(note_rows[0].note), keyword_rows: keyword_rows});
+		response.render('pages/one_note',	{note_rows: note_rows, note: note_rows[0].note, keyword_rows: keyword_rows});
 	});
 	});
 });

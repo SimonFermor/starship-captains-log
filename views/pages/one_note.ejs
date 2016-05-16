@@ -4,13 +4,7 @@
   <% include ../partials/header.ejs %>
 
   <style type="text/css">
-  <!--
-  body {
-  background-image: url();
-  background-repeat: no-repeat;
-  background-size: 100%;
-  color: green;
-  }
+
   h1 { font-size: 1.5em;
   }
   tr {
@@ -18,22 +12,29 @@
     border-top: 1px solid black;
     border-collapse: collapse;
 }​
-  -->
+
   </style>
+  
   <style type="text/css">
-  <!--
+
   body {
   background-image: url(https://mthupp.files.wordpress.com/2013/09/starry-night-871287410454umth.jpg);
   background-repeat: no-repeat;
   background-size: 100%;
+  color: green;
+
   }
-  -->
+
+	#edit_area { position: fixed; top: 0; right: 0; height: 100%; background: white; padding: 10px 0; z-index: 1000}
+
   </style>
 </head>
 
 <body>
 
 <% include ../partials/nav.ejs %>
+
+<textarea id="edit_area" oninput="this.editor.update()" rows="20" cols="60" style="display:none;"><%- note %></textarea>
 
 <div class="container">
 <table style="width: 100%;">
@@ -48,11 +49,12 @@
 
 <div class="table-responsive">
 <table>
+<tr><td><button onclick="$('#edit_area').toggle();">edit</button></td></tr>
     <tr><td style="font-weight: bold;" colspan="2"><h3>Area of Investigation: <%= note_rows[0].title %></h3></td></tr>
     <tr><td style="font-weight: bold; width: 150px;">Summary:</td><td> <%=note_rows[0].summary %></td></tr>
     <tr>
       <td style="font-weight: bold; vertical-align: top;">Detail Findings:</td>
-      <td style="vertical-align: top;"> <%- note %></td>
+      <td style="vertical-align: top;" id="note"><%- note %></td>
     </tr>
     <tr><td style="font-weight: bold;">Keywords:</td>
       <td>-
@@ -82,5 +84,24 @@
 
 </div>
 
+<script>
+	// jQuery not yet loaded, so use plain JavaScript
+    new Editor(document.getElementById("edit_area"), document.getElementById("note"));
+	  
+	  function toggle_visibility(id) 
+{
+    var e = document.getElementById(id);
+    if (e.style.display == 'block' || e.style.display=='')
+    {
+        e.style.display = 'none';
+    }
+    else 
+    {
+        e.style.display = 'block';
+    }
+}
+    </script>
+
 </body>
+
 </html>
