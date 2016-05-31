@@ -1,9 +1,46 @@
 <nav class="navbar navbar-default navbar-static-top navbar-inverse">
   <div class="container">
     <ul class="nav navbar-nav">
-      <li class="active">
+      <li>
         <a href="/"><span class="glyphicon glyphicon-home"></span> Home</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-right navbar-nav">
+      <li id="edit_icon">
+        <a href="#" onclick="toggle_editor();">
+			<span class="glyphicon glyphicon-pencil"></span> Edit</a>
+      </li>
+	  <li id="save_icon" style="display:none;" >
+          <a href="#" onclick="save();">
+			<span class="glyphicon glyphicon-ok"></span> Save</a>
+      </li>
+      <li id="cancel_icon" style="display:none;" >
+          <a href="#" onclick="toggle_editor();">
+			<span class="glyphicon glyphicon-remove"></span> Cancel</a>
       </li>
     </ul>
   </div>
 </nav>
+
+<script>
+function toggle_editor() {
+	$('#edit_icon').toggle();
+	$('#save_icon').toggle();
+	$('#cancel_icon').toggle();
+	$('#edit_box').toggle();
+}
+
+function save() {
+	$('#edit_icon').toggle();
+	$('#save_icon').toggle();
+	$('#cancel_icon').toggle();
+	$('#edit_box').toggle();
+	console.log('Saving....');
+	$.post('/one_note/', {note_id: $('#edit_area').attr('note_id'), note: $('#edit_area').val()}, function(data) {
+		alert(data);
+		}
+	);
+	console.log('Saved!');
+}
+
+</script>

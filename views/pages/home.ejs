@@ -10,6 +10,9 @@
   background-repeat: no-repeat;
   background-size: 100%;
   }
+  table {
+	background-color: rgba(204, 204, 204, 0.72)
+	}
   -->
   </style>
 </head>
@@ -19,27 +22,31 @@
 <% include ../partials/nav.ejs %>
 
 <div class="container">
-<h2>Starship Captain's Log</h2>
 
 <div class="table-responsive">
 
-<table class="table table-striped">
+<table class="table">
+<thead>
+	<th>
+	<td colspan="5"><h2>Captain Arthur's Starship Log</h2></td>
+	</th>
+</thead>
 
 <thead>
 	<th>Stardate</th>
 	<th>Title</th>
 	<th>Summary</th>
-	<th>Note</th>
+	<th colspan="2">Note</th>
 </thead>
 
 <tbody>
-
 <% note_rows.forEach(function(r) { %>
 	<tr>
   	<td><%= dateFormat(r.created_at) %></td>
   	<td><%= r.title %></td>
   	<td><%= r.summary %></td>
   	<td><%= r.note %></td>
+  	<td><button onclick="javascript:location.href='/one_note?note_id=<%= r.note_id %>'">Edit</button></td>
 	</tr>
 <% }); %>
 

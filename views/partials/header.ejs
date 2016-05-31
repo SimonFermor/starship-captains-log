@@ -6,11 +6,11 @@
 <script src="/markdown/lib/markdown.js"></script>
 
 <script>
-	function Editor(input, preview) {
+function Editor(input, preview) {
 	this.update = function () {
-	  preview.innerHTML = markdown.toHTML(input.value);
-	};
+		preview.innerHTML = markdown.toHTML(input.value);
+		};
 	input.editor = this;
 	this.update();
-	}
+}
 </script>

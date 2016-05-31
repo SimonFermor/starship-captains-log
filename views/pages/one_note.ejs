@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <% include ../partials/header.ejs %>
+	<% include ../partials/header.ejs %>
 
-  <style type="text/css">
+	<style type="text/css">
+	body {
+	background-image: url(https://mthupp.files.wordpress.com/2013/09/starry-night-871287410454umth.jpg);
+	background-repeat: repeat;
+	background-size: 100%;
+	color: green;
+	}
 
-  h1 { font-size: 1.5em;
-  }
-  tr {
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-    border-collapse: collapse;
-}​
-
-  </style>
-  
-  <style type="text/css">
-
-  body {
-  background-image: url(https://mthupp.files.wordpress.com/2013/09/starry-night-871287410454umth.jpg);
-  background-repeat: no-repeat;
-  background-size: 100%;
-  color: green;
-
-  }
-
-	#edit_area { position: fixed; top: 0; right: 0; height: 100%; background: white; padding: 10px 0; z-index: 1000}
-
-  </style>
+	#edit_area {
+	position: fixed;
+	top: 70px;
+	right: 5px;
+	bottom: 55px;
+	height: 100%;
+	background: black;
+	padding: 0;
+	z-index: 1000;
+	}
+	</style>
 </head>
 
 <body>
 
 <% include ../partials/nav.ejs %>
 
-<textarea id="edit_area" oninput="this.editor.update()" rows="20" cols="60" style="display:none;"><%- note %></textarea>
+<div id="edit_box" style="display:none; padding-top:70; padding-bottom:10; border:1px; solid green;">
+	<div>
+		<textarea id="edit_area" note_id="<%= note_rows[0].note_id %>" oninput="this.editor.update()" rows="20" cols="60" 
+			><%- note %></textarea>
+	</div>
+</div>
 
 <div class="container">
 <table style="width: 100%;">
@@ -48,59 +47,29 @@
 </table>
 
 <div class="table-responsive">
-<table>
-<tr><td><button onclick="$('#edit_area').toggle();">edit</button></td></tr>
-    <tr><td style="font-weight: bold;" colspan="2"><h3>Area of Investigation: <%= note_rows[0].title %></h3></td></tr>
-    <tr><td style="font-weight: bold; width: 150px;">Summary:</td><td> <%=note_rows[0].summary %></td></tr>
-    <tr>
-      <td style="font-weight: bold; vertical-align: top;">Detail Findings:</td>
-      <td style="vertical-align: top;" id="note"><%- note %></td>
-    </tr>
-    <tr><td style="font-weight: bold;">Keywords:</td>
-      <td>-
-        <% keyword_rows.forEach(function(r) { %>
-          <%= r.keyword %> -
-        <% }); %>
-      </td>
-    </tr>
-</table>
-
-<!-- to be modified so that form can be used to edit
-<tr>
-<form action="/" method="post">
-  <td></td>
-	<td><input name="title" type="text" class="form-control" placeholder="Title"></input></td>
-	<td><input name="summary" type="text" class="form-control" placeholder="Summary of note"></input></td>
-	<td><textarea name="note" id="note" class="form-control" placeholder="Note..."></textarea></td>
-	<td><input type="submit" value="Add New"></td>
-</form>
-</tr>
-
-</tbody>
-</table>
--->
-
+	<table>
+		<tr><td style="font-weight: bold;" colspan="2"><h3>Area of Investigation: <%= note_rows[0].title %></h3></td></tr>
+		<tr><td style="font-weight: bold; width: 150px;">Summary:</td><td> <%=note_rows[0].summary %></td></tr>
+		<tr>
+		  <td style="font-weight: bold; vertical-align: top;">Detail Findings:</td>
+		  <td style="vertical-align: top;" id="note"><%- note %></td>
+		</tr>
+		<tr><td style="font-weight: bold;">Keywords:</td>
+		  <td>-
+			<% keyword_rows.forEach(function(r) { %>
+			  <%= r.keyword %> -
+			<% }); %>
+		  </td>
+		</tr>
+	</table>
 </div>
 
 </div>
 
 <script>
 	// jQuery not yet loaded, so use plain JavaScript
-    new Editor(document.getElementById("edit_area"), document.getElementById("note"));
-	  
-	  function toggle_visibility(id) 
-{
-    var e = document.getElementById(id);
-    if (e.style.display == 'block' || e.style.display=='')
-    {
-        e.style.display = 'none';
-    }
-    else 
-    {
-        e.style.display = 'block';
-    }
-}
-    </script>
+	new Editor(document.getElementById("edit_area"), document.getElementById("note"));
+</script>
 
 </body>
 

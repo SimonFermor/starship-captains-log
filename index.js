@@ -70,6 +70,11 @@ app.get('/one_note/', function(request, response) {
 	});
 });
 
+app.post('/one_note/', function(request, response) {
+	console.log(request.body.note_id);
+	connection.query('update notes set note = ? where note_id = ?', [request.body.note, request.body.note_id]);
+});
+
 // Save form to database and reload page
 app.post('/', function(request, response) {
 	var form_data = {title: request.body.title, summary: request.body.summary, note: request.body.note};
