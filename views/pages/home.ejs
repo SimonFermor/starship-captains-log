@@ -2,19 +2,6 @@
 <html>
 <head>
   <% include ../partials/header.ejs %>
-
-  <style type="text/css">
-  <!--
-  body {
-  background-image: url(http://ontherocks.ie/wp-content/uploads/2015/09/space-257-eso-nebula_70254_600x450.jpg);
-  background-repeat: no-repeat;
-  background-size: 100%;
-  }
-  table {
-	background-color: rgba(204, 204, 204, 0.72)
-	}
-  -->
-  </style>
 </head>
 
 <body>
@@ -23,14 +10,11 @@
 
 <div class="container">
 
+<h2>Captain Arthur's Starship Log</h2>
+
 <div class="table-responsive">
 
 <table class="table">
-<thead>
-	<th>
-	<td colspan="5"><h2>Captain Arthur's Starship Log</h2></td>
-	</th>
-</thead>
 
 <thead>
 	<th>Stardate</th>
@@ -46,17 +30,20 @@
   	<td><%= r.title %></td>
   	<td><%= r.summary %></td>
   	<td><%= r.note %></td>
-  	<td><button onclick="javascript:location.href='/one_note?note_id=<%= r.note_id %>'">Edit</button></td>
+  	<td><a href='/one_note/<%= r.note_id %>'"><span class="glyphicon glyphicon-fullscreen"></span> </a></td>
 	</tr>
 <% }); %>
 
 <tr>
+
 <form action="/" method="post">
   <td></td>
 	<td><input name="title" type="text" class="form-control" placeholder="Title"></input></td>
 	<td><input name="summary" type="text" class="form-control" placeholder="Summary of note"></input></td>
-	<td><textarea name="note" id="note" class="form-control" placeholder="Note..."></textarea></td>
-	<td><input type="submit" value="Add New"></td>
+	<td>
+	<!-- <textarea name="note" id="note" class="form-control" placeholder="Note..."></textarea> -->
+	</td>
+	<td><input type="submit" class="form-control" value="Add New"></td>
 </form>
 </tr>
 

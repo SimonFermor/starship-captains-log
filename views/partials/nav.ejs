@@ -1,3 +1,8 @@
+<style>
+.navbar-inverse .navbar-nav>li>a {
+	color:green;
+}
+</style>
 <nav class="navbar navbar-default navbar-static-top navbar-inverse">
   <div class="container">
     <ul class="nav navbar-nav">
@@ -6,7 +11,11 @@
       </li>
     </ul>
     <ul class="nav navbar-right navbar-nav">
-      <li id="edit_icon">
+      <li id="new_icon">
+        <a href="#" onclick="javascript:location.href='/one_note'">
+			<span class="glyphicon glyphicon-pencil"></span> New</a>
+      </li>
+      <li id="edit_icon" style="display:none;">
         <a href="#" onclick="toggle_editor();">
 			<span class="glyphicon glyphicon-pencil"></span> Edit</a>
       </li>

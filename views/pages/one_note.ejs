@@ -2,26 +2,6 @@
 <html>
 <head>
 	<% include ../partials/header.ejs %>
-
-	<style type="text/css">
-	body {
-	background-image: url(https://mthupp.files.wordpress.com/2013/09/starry-night-871287410454umth.jpg);
-	background-repeat: repeat;
-	background-size: 100%;
-	color: green;
-	}
-
-	#edit_area {
-	position: fixed;
-	top: 70px;
-	right: 5px;
-	bottom: 55px;
-	height: 100%;
-	background: black;
-	padding: 0;
-	z-index: 1000;
-	}
-	</style>
 </head>
 
 <body>
@@ -31,7 +11,7 @@
 <div id="edit_box" style="display:none; padding-top:70; padding-bottom:10; border:1px; solid green;">
 	<div>
 		<textarea id="edit_area" note_id="<%= note_rows[0].note_id %>" oninput="this.editor.update()" rows="20" cols="60" 
-			><%- note %></textarea>
+			><%- note_rows[0].note %></textarea>
 	</div>
 </div>
 
@@ -48,18 +28,35 @@
 
 <div class="table-responsive">
 	<table>
-		<tr><td style="font-weight: bold;" colspan="2"><h3>Area of Investigation: <%= note_rows[0].title %></h3></td></tr>
-		<tr><td style="font-weight: bold; width: 150px;">Summary:</td><td> <%=note_rows[0].summary %></td></tr>
 		<tr>
-		  <td style="font-weight: bold; vertical-align: top;">Detail Findings:</td>
-		  <td style="vertical-align: top;" id="note"><%- note %></td>
+			<td style="font-weight: bold;" colspan="2">
+				<h3>Area of Investigation:</h3>
+			</td>
 		</tr>
-		<tr><td style="font-weight: bold;">Keywords:</td>
-		  <td>-
+		<tr>
+			<td></td>
+			<td style="font-weight: bold;"><%= note_rows[0].title %>
+				<input name="title" type="text" class="form-control" placeholder="<note title>"
+					value="<%= note_rows[0].title %>"></input>
+			</td>
+		</tr>
+		<tr>
+			<td style="font-weight: bold;">Keywords:</td>
+			<td>
 			<% keyword_rows.forEach(function(r) { %>
 			  <%= r.keyword %> -
 			<% }); %>
-		  </td>
+			</td>
+		</tr>
+		<tr>
+			<td style="font-weight: bold; width: 150px;">Summary:</td>
+			<td><%=note_rows[0].summary %>
+				<input name="title" type="text" class="form-control" placeholder=""
+					value="<%=note_rows[0].summary %>"></td>
+		</tr>
+		<tr>
+			<td style="font-weight: bold; vertical-align: top;">Detail Findings:</td>
+			<td style="vertical-align: top;" id="note"><%- note_rows[0].note %></td>
 		</tr>
 	</table>
 </div>
@@ -69,6 +66,8 @@
 <script>
 	// jQuery not yet loaded, so use plain JavaScript
 	new Editor(document.getElementById("edit_area"), document.getElementById("note"));
+	$('#edit_icon').toggle();
+	$('#new_icon').toggle();
 </script>
 
 </body>

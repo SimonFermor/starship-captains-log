@@ -1,6 +1,5 @@
 var express = require('express');
 var markdown = require('markdown').markdown;
-
 // var favicon = require('favicon');
 var app = express();
 
@@ -45,11 +44,16 @@ var tomorrow = moment().add(1, 'days').format('YYYY-MM-DD');
 // URL and form parsing
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use( bodyParser.urlencoded({ extended: true}) );
 
 // Express helper functions
 app.locals.dateFormat = function(obj) { return moment(obj).format("dddd, MMMM Do"); };
 // app.locals.markdown = function(obj) { return markdown.toHTML(obj); };
+
+// Start listening
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
 
 // Default page
 app.get('/', function(request, response) {
@@ -58,21 +62,6 @@ app.get('/', function(request, response) {
 			response.render('pages/home', {keyword_rows: keyword_rows, note_rows:note_rows, today: today, tomorrow: tomorrow});
 		});
 	});
-});
-
-app.get('/one_note/', function(request, response) {
-	query_note(request.param('note_id'), function(err, note_rows, note_fields) {
-		//var note = results[0][0];
-		//console.log(note.note);
-		query_note_keywords(request.param('note_id'), note_rows, function(err, note_rows, keyword_rows) {
-		response.render('pages/one_note',	{note_rows: note_rows, note: note_rows[0].note, keyword_rows: keyword_rows});
-	});
-	});
-});
-
-app.post('/one_note/', function(request, response) {
-	console.log(request.body.note_id);
-	connection.query('update notes set note = ? where note_id = ?', [request.body.note, request.body.note_id]);
 });
 
 // Save form to database and reload page
@@ -87,11 +76,6 @@ app.post('/', function(request, response) {
 	});
 });
 
-// Start listening
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});
-
 // Get latest notes
 var query_notes = function(callback) {
 	var sql = 'select note_id, title, summary, note, created_at, last_updated_at';
@@ -104,26 +88,75 @@ var query_notes = function(callback) {
 	return;
 };
 
+// Show page with existing note
+app.get('/one_note/:note_id', function(request, response) {
+	query_note(request.param('note_id'), function(err, note_rows) {
+		query_note_keywords(request.params.note_id, function(err, keyword_rows) {
+			response.render('pages/one_note',	{note_rows: note_rows, row_count: note_rows.length, keyword_rows: keyword_rows});
+		});
+	});
+});
+
+// Show page for new note
+app.get('/one_note', function(request, response) {
+	var note_date = new Date();
+	var note_rows =  [{
+		note_id: null, 
+		title: null, 
+		summary: null, 
+		note: null,
+		created_at: note_date.getFullYear() + '-' + note_date.getMonth() + '-' + note_date.getDate() + 'T21:02:10.000Z',
+		last_updated_at: null
+		}];
+	var keyword_rows = [{}];
+	response.render('pages/one_note', {note_rows: note_rows, row_count: note_rows.length, keyword_rows: keyword_rows});
+});
+
+// Save new note or changes
+app.post('/one_note/', function(request, response) {
+	console.log(request.body.note_id);
+	if (request.body.note_id == 0) {
+		connection.query('insert into notes set ?', {note: request.body.note}, function(err, result) {
+			if (err) throw err;
+			console.log(result.insertId);
+		});
+	}
+	else {
+		connection.query('update notes set note = ? where note_id = ?', [request.body.note, request.body.note_id]);
+	}
+});
+
 // Get details for selected note
 var query_note = function(note_id, callback) {
 	var sql = 'select note_id, title, summary, note, created_at, last_updated_at';
 		sql += ' from notes ';
 		sql += ' where note_id =  ' + note_id + ' ;';
-	connection.query(sql, function(err, note_rows, note_fields) {
+	connection.query(sql, function(err, rows, fields) {
 		if (err) throw err;
-		console.log(note_rows);
-		// console.log(fields);
-		callback(null, note_rows, note_fields);
+		console.log(rows);
+		if (!rows.length) {
+			var note_date = new Date();
+			rows =  [{
+				note_id: null, 
+				title: '', 
+				summary: '', 
+				note: 'This is it!',
+				created_at: note_date.getFullYear() + '-' + note_date.getMonth() + '-' + note_date.getDate() + 'T21:02:10.000Z',
+				last_updated_at: null
+			}]
+		}
+		callback(null, rows);
 	});
 	return;
 };
 
-var query_note_keywords = function(note_id, note_rows, callback) {
+// Get keywords for selected note
+var query_note_keywords = function(note_id, callback) {
 	var sql = ' select * from note_keywords where note_id = ' + note_id + ' ; ';
 	//console.log(sql_1);
 	connection.query(sql, function(err, keyword_rows, keyword_fields) {
 		if (err) throw err;
-		callback(null, note_rows, keyword_rows, keyword_fields);
+		callback(null, keyword_rows);
 	});
 	return;
 }

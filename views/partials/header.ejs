@@ -5,6 +5,36 @@
 <link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
 <script src="/markdown/lib/markdown.js"></script>
 
+<style type="text/css">
+body {
+  // http://ontherocks.ie/wp-content/uploads/2015/09/space-257-eso-nebula_70254_600x450.jpg);
+  }
+body {
+	background-image: url(https://mthupp.files.wordpress.com/2013/09/starry-night-871287410454umth.jpg);
+	background-repeat: repeat;
+	background-size: 100%;
+	color: green;
+	}
+#edit_area {
+	position: fixed;
+	top: 70px;
+	right: 5px;
+	bottom: 55px;
+	height: 100%;
+	background: black;
+	padding: 0;
+	z-index: 1000;
+	}
+.form-control {
+    background-color: rgba(255,255,255,.15);
+	border: none;
+	color: green;
+	visibility: hidden;
+	}
+input {
+}
+</style>
+
 <script>
 function Editor(input, preview) {
 	this.update = function () {
@@ -14,3 +44,4 @@ function Editor(input, preview) {
 	this.update();
 }
 </script>
+
