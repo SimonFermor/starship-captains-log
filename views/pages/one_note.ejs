@@ -8,9 +8,10 @@
 
 <% include ../partials/nav.ejs %>
 
+<!-- Note edit box - shown for editing and contains markdown -->
 <div id="edit_box" style="display:none; padding-top:70; padding-bottom:10; border:1px; solid green;">
-	<div>
-		<textarea id="edit_area" note_id="<%= note_rows[0].note_id %>" oninput="this.editor.update()" rows="20" cols="60" 
+	<div>Enter notes in markdown below:
+		<textarea class="form-control" id="edit_area" note_id="<%= note_rows[0].note_id %>" oninput="this.editor.update()" rows="20" cols="60" 
 			><%- note_rows[0].note %></textarea>
 	</div>
 </div>
@@ -27,21 +28,19 @@
 </table>
 
 <div class="table-responsive">
-	<table>
+	<table style="width: 60%;">
 		<tr>
-			<td style="font-weight: bold;" colspan="2">
-				<h3>Area of Investigation:</h3>
+			<td style="width:20%" class="table-title">
+				Area of Investigation:
+			</td>
+			<td>
+				<span class="note-data"><%= note_rows[0].title %></span>
+				<input name="note_title" type="text" class="form-control" placeholder="<note title>"
+					id="note_title" value="<%= note_rows[0].title %>"></input>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
-			<td style="font-weight: bold;"><%= note_rows[0].title %>
-				<input name="title" type="text" class="form-control" placeholder="<note title>"
-					value="<%= note_rows[0].title %>"></input>
-			</td>
-		</tr>
-		<tr>
-			<td style="font-weight: bold;">Keywords:</td>
+			<td class="table-title">Keywords:</td>
 			<td>
 			<% keyword_rows.forEach(function(r) { %>
 			  <%= r.keyword %> -
@@ -49,14 +48,18 @@
 			</td>
 		</tr>
 		<tr>
-			<td style="font-weight: bold; width: 150px;">Summary:</td>
-			<td><%=note_rows[0].summary %>
-				<input name="title" type="text" class="form-control" placeholder=""
-					value="<%=note_rows[0].summary %>"></td>
+			<td class="table-title">Summary:</td>
+			<td>
+				<p class="note-data"><%=note_rows[0].summary %></p>
+				<textarea name="note_summary" type="text" class="form-control" placeholder="<brief summary>"
+					id="note_summary" value=""><%=note_rows[0].summary %></textarea>
+			</td>
 		</tr>
 		<tr>
-			<td style="font-weight: bold; vertical-align: top;">Detail Findings:</td>
-			<td style="vertical-align: top;" id="note"><%- note_rows[0].note %></td>
+			<td class="table-title">Detail Notes:</td>
+			<td>
+				<div id="note" style="padding: 6px 12px;"><%- note_rows[0].note %></div>
+			</td>
 		</tr>
 	</table>
 </div>
@@ -68,6 +71,7 @@
 	new Editor(document.getElementById("edit_area"), document.getElementById("note"));
 	$('#edit_icon').toggle();
 	$('#new_icon').toggle();
+	$('.form-control').toggle();
 </script>
 
 </body>
