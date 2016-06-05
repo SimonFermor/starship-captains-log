@@ -34,9 +34,9 @@
 		<tr>
 			<td class="table-title">Keywords:</td>
 			<td colspan="2">
-			<% keyword_rows.forEach(function(r) { %>
+			<p><% keyword_rows.forEach(function(r) { %>
 			  <%= r.keyword %> -
-			<% }); %>
+			<% }); %></p>
 			</td>
 		</tr>
 		<tr>
@@ -52,7 +52,7 @@
 		</tr>
 		<tr>
 			<td class="table-title">Detail Notes:</td>
-			<td>
+			<td  width="50%">
 				<div id="note" style="padding: 6px 12px;"><%- note_rows[0].note %></div>
 			</td>
 			<td>
