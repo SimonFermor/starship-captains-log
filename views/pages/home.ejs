@@ -17,7 +17,7 @@
 <table class="table">
 
 <thead>
-	<th>Stardate</th>
+	<th>Earthdate</th>
 	<th>Title</th>
 	<th>Summary</th>
 	<th colspan="2">Note</th>
@@ -29,11 +29,17 @@
   	<td><%= dateFormat(r.created_at) %></td>
   	<td><%= r.title %></td>
   	<td><%= r.summary %></td>
-  	<td><%= r.note %></td>
+  	<td><% if (r.note) { %><%= r.note.substr(0,50) %>
+			<% if (r.note.length > 50) { %>
+				<%= '...' %>
+			<% } %>
+		<% } %>
+	</td>
   	<td><a href='/one_note/<%= r.note_id %>'"><span class="glyphicon glyphicon-fullscreen"></span> </a></td>
 	</tr>
 <% }); %>
 
+<!--
 <tr>
 
 <form action="/" method="post">
@@ -41,11 +47,12 @@
 	<td><input name="title" type="text" class="form-control" placeholder="Title"></input></td>
 	<td><input name="summary" type="text" class="form-control" placeholder="Summary of note"></input></td>
 	<td>
-	<!-- <textarea name="note" id="note" class="form-control" placeholder="Note..."></textarea> -->
+	<textarea name="note" id="note" class="form-control" placeholder="Note..."></textarea>
 	</td>
 	<td><input type="submit" class="form-control" value="Add New"></td>
 </form>
 </tr>
+-->
 
 </tbody>
 </table>

@@ -37,6 +37,7 @@ function toggle_editor() {
 	$('#save_icon').toggle();
 	$('#cancel_icon').toggle();
 	$('#edit_box').toggle();
+	$('#edit_hint').toggle();
 	$('.form-control').toggle();
 	$('.note-data').toggle();
 }
@@ -46,6 +47,9 @@ function save() {
 	$('#save_icon').toggle();
 	$('#cancel_icon').toggle();
 	$('#edit_box').toggle();
+	$('#edit_hint').toggle();
+	$('.form-control').toggle();
+	$('.note-data').toggle();
 	console.log('Saving....');
 	$.post('/one_note/', {note_id: $('#edit_area').attr('note_id'), note: $('#edit_area').val()}, function(data) {
 		alert(data);

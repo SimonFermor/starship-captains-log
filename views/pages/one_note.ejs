@@ -8,32 +8,24 @@
 
 <% include ../partials/nav.ejs %>
 
-<!-- Note edit box - shown for editing and contains markdown -->
-<div id="edit_box" style="display:none; padding-top:70; padding-bottom:10; border:1px; solid green;">
-	<div>Enter notes in markdown below:
-		<textarea class="form-control" id="edit_area" note_id="<%= note_rows[0].note_id %>" oninput="this.editor.update()" rows="20" cols="60" 
-			><%- note_rows[0].note %></textarea>
-	</div>
-</div>
-
 <div class="container">
 <table style="width: 100%;">
   <tr>
     <td><h2>Captain Arthur's Starship Log</h2></td>
     <td style="text-align: right;">
-      Stardate: <%= dateFormat(note_rows[0].created_at) %><br>
+      Earthdate: <%= dateFormat(note_rows[0].created_at) %><br>
       Starlog ID#: <%= note_rows[0].note_id %>
     </td>
   </tr>
 </table>
 
 <div class="table-responsive">
-	<table style="width: 60%;">
+	<table style="width: 100%;">
 		<tr>
 			<td style="width:20%" class="table-title">
 				Area of Investigation:
 			</td>
-			<td>
+			<td colspan="2">
 				<span class="note-data"><%= note_rows[0].title %></span>
 				<input name="note_title" type="text" class="form-control" placeholder="<note title>"
 					id="note_title" value="<%= note_rows[0].title %>"></input>
@@ -41,7 +33,7 @@
 		</tr>
 		<tr>
 			<td class="table-title">Keywords:</td>
-			<td>
+			<td colspan="2">
 			<% keyword_rows.forEach(function(r) { %>
 			  <%= r.keyword %> -
 			<% }); %>
@@ -49,16 +41,24 @@
 		</tr>
 		<tr>
 			<td class="table-title">Summary:</td>
-			<td>
+			<td colspan="2">
 				<p class="note-data"><%=note_rows[0].summary %></p>
 				<textarea name="note_summary" type="text" class="form-control" placeholder="<brief summary>"
 					id="note_summary" value=""><%=note_rows[0].summary %></textarea>
-			</td>
+		</tr>
+		<tr>
+			<td colspan="2"></td>
+			<td><span id="edit_hint">Enter notes in <a href="https://www.cheatography.com/simon-fermor/cheat-sheets/markdown/">markdown</a> format:</span></td>
 		</tr>
 		<tr>
 			<td class="table-title">Detail Notes:</td>
 			<td>
 				<div id="note" style="padding: 6px 12px;"><%- note_rows[0].note %></div>
+			</td>
+			<td>
+				<!-- Note edit box - shown for editing and contains markdown -->
+				<textarea class="form-control" id="edit_area" note_id="<%= note_rows[0].note_id %>" 
+					oninput="this.editor.update()" rows="20" cols="60"><%- note_rows[0].note %></textarea>
 			</td>
 		</tr>
 	</table>
@@ -69,6 +69,8 @@
 <script>
 	// jQuery not yet loaded, so use plain JavaScript
 	new Editor(document.getElementById("edit_area"), document.getElementById("note"));
+	// Hide edit fields and navbar links
+	$('#edit_hint').toggle();
 	$('#edit_icon').toggle();
 	$('#new_icon').toggle();
 	$('.form-control').toggle();
