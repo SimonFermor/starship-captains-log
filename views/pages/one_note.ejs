@@ -64,9 +64,11 @@
 		</tr>
 			<td class="table-title">References</td>
 			<td colspan="2">
-			<p class="note-data"><% url_rows.forEach(function(u) { %>
-			  <%= u.title %>. <%= u.website_name %>. Accessed <%= u.accessed_at %>
-			<% }); %></p>
+			<% url_rows.forEach(function(u) { %>
+			<p class="note-data">
+			  <a href="<%= u.url %>" ><%= u.title %></a>. <%= u.website_name %>. Accessed <%= u.accessed_at %>
+			 </p>
+			<% }); %>
 			</td>
 		<tr>
 		</tr>
