@@ -96,7 +96,7 @@ app.get('/one_note/:note_id', function(request, response) {
 				response.render('pages/one_note',	
 					{note_rows: note_rows, row_count: note_rows.length, 
 					keyword_rows: keyword_rows, url_rows: url_rows});
-			}
+			});
 		});
 	});
 });
