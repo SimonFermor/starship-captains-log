@@ -93,7 +93,7 @@
 	$('#new_icon').toggle();
 	$('.form-control').toggle();
 	$('#references').innerHTML = markdown.toHTML($('#references#').innerHTML());
-	$('#note_summary').innerHTML = markdown.toHTML($('#note_summary#').innerHTML());
+	$('#note_summary').value = markdown.toHTML($('#note_summary#').value());
 </script>
 
 </body>
