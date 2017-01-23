@@ -42,8 +42,12 @@
 		<tr>
 			<td class="table-title">Summary:</td>
 			<td colspan="2">
+				<div id="note_summary" style="padding: 6px 12px;">
+				</div>
+			</td>
+			<td>
 				<p class="note-data" id="note_summary_2"><%=note_rows[0].summary %></p>
-				<textarea name="note_summary" type="text" class="form-control" placeholder="<brief summary>"
+				<textarea name="note_summary_edit" type="text" class="form-control" placeholder="<brief summary>"
 					id="note_summary" value=""><%=note_rows[0].summary %></textarea>
 			</td>
 		</tr>
@@ -51,7 +55,7 @@
 			<td colspan="2"></td>
 			<td>
 			<span id="edit_hint">
-				Enter notes in 
+				Enter notes in
 				<a href="https://www.cheatography.com/simon-fermor/cheat-sheets/markdown/">markdown</a> format:
 			</span>
 			</td>
@@ -65,7 +69,7 @@
 			</td>
 			<td>
 				<!-- Note edit box - shown for editing and contains markdown -->
-				<textarea class="form-control" id="edit_area" note_id="<%= note_rows[0].note_id %>" 
+				<textarea class="form-control" id="edit_area" note_id="<%= note_rows[0].note_id %>"
 					oninput="this.editor.update()" rows="20" cols="60"><%- note_rows[0].note %></textarea>
 			</td>
 		</tr>
@@ -93,7 +97,7 @@
 	$('#new_icon').toggle();
 	$('.form-control').toggle();
 	//$('#references').innerHTML = markdown.toHTML($('#references').innerHTML());
-	$('#note_summary_2').innerHTML = markdown.toHTML($('#note_summary_2').innerHTML());
+	$('#note_summary').text = markdown.toHTML('<%=note_rows[0].summary %>');
 </script>
 
 </body>
