@@ -42,7 +42,7 @@
 		<tr>
 			<td class="table-title">Summary:</td>
 			<td colspan="2">
-				<p class="note-data"><%=note_rows[0].summary %></p>
+				<p class="note-data" id="note_summary_2"><%=note_rows[0].summary %></p>
 				<textarea name="note_summary" type="text" class="form-control" placeholder="<brief summary>"
 					id="note_summary" value=""><%=note_rows[0].summary %></textarea>
 			</td>
@@ -93,7 +93,7 @@
 	$('#new_icon').toggle();
 	$('.form-control').toggle();
 	$('#references').innerHTML = markdown.toHTML($('#references#').innerHTML());
-	$('#note_summary').value = markdown.toHTML($('#note_summary#').value());
+	$('#note_summary_2').innerHTML = markdown.toHTML($('#note_summary_2').innerHTML());
 </script>
 
 </body>
