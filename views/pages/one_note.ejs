@@ -43,6 +43,7 @@
 			<td class="table-title">Summary:</td>
 			<td colspan="2">
 				<div id="note_summary" style="padding: 6px 12px;">
+					<%=note_rows[0].summary %>
 				</div>
 			</td>
 			<td>
@@ -97,7 +98,7 @@
 	$('#new_icon').toggle();
 	$('.form-control').toggle();
 	//$('#references').innerHTML = markdown.toHTML($('#references').innerHTML());
-	$('#note_summary').text = markdown.toHTML('<%=note_rows[0].summary %>');
+	$('#note_summary').text = markdown.toHTML($('#note_summary').text());
 </script>
 
 </body>
