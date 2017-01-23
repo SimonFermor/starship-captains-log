@@ -15,6 +15,7 @@
     "markdown": "^0.5.0",
     "moment": "~2.11.1",
     "mysql": "~2.10.2",
+    "npm-expansions": "^2.2.4",
     "qtip2": "~3.0.2",
     "serve-favicon": "~2.3.0"
   },

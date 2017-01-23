@@ -45,6 +45,7 @@
 				<p class="note-data"><%=note_rows[0].summary %></p>
 				<textarea name="note_summary" type="text" class="form-control" placeholder="<brief summary>"
 					id="note_summary" value=""><%=note_rows[0].summary %></textarea>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2"></td>
@@ -60,6 +61,14 @@
 				<textarea class="form-control" id="edit_area" note_id="<%= note_rows[0].note_id %>" 
 					oninput="this.editor.update()" rows="20" cols="60"><%- note_rows[0].note %></textarea>
 			</td>
+		</tr>
+			<td class="table-title">References</td>
+			<td colspan="2">
+			<p class="note-data"><% keyword_rows.forEach(function(r) { %>
+			  <%= r.keyword %> -
+			<% }); %></p>
+			</td>
+		<tr>
 		</tr>
 	</table>
 </div>

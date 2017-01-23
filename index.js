@@ -92,7 +92,11 @@ var query_notes = function(callback) {
 app.get('/one_note/:note_id', function(request, response) {
 	query_note(request.param('note_id'), function(err, note_rows) {
 		query_note_keywords(request.params.note_id, function(err, keyword_rows) {
-			response.render('pages/one_note',	{note_rows: note_rows, row_count: note_rows.length, keyword_rows: keyword_rows});
+			query_note_urls(request.params.note_id, function(err, url_rows) {
+				response.render('pages/one_note',	
+					{note_rows: note_rows, row_count: note_rows.length, 
+					keyword_rows: keyword_rows, url_rows: url_rows});
+			}
 		});
 	});
 });
@@ -157,6 +161,17 @@ var query_note_keywords = function(note_id, callback) {
 	connection.query(sql, function(err, keyword_rows, keyword_fields) {
 		if (err) throw err;
 		callback(null, keyword_rows);
+	});
+	return;
+}
+
+// Get url references for selected note
+var query_note_urls = function(note_id, callback) {
+	var sql = ' select * from note_urls where note_id = ' + note_id + ' ; ';
+	//console.log(sql_1);
+	connection.query(sql, function(err, url_rows, url_fields) {
+		if (err) throw err;
+		callback(null, url_rows);
 	});
 	return;
 }
