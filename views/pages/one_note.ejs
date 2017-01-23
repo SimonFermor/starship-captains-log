@@ -49,12 +49,19 @@
 		</tr>
 		<tr>
 			<td colspan="2"></td>
-			<td><span id="edit_hint">Enter notes in <a href="https://www.cheatography.com/simon-fermor/cheat-sheets/markdown/">markdown</a> format:</span></td>
+			<td>
+			<span id="edit_hint">
+				Enter notes in 
+				<a href="https://www.cheatography.com/simon-fermor/cheat-sheets/markdown/">markdown</a> format:
+			</span>
+			</td>
 		</tr>
 		<tr>
 			<td class="table-title">Detail Notes:</td>
 			<td  width="50%">
-				<div id="note" style="padding: 6px 12px;"><%- note_rows[0].note %></div>
+				<div id="note" style="padding: 6px 12px;">
+					<%- note_rows[0].note %>
+				</div>
 			</td>
 			<td>
 				<!-- Note edit box - shown for editing and contains markdown -->
@@ -66,7 +73,7 @@
 			<td colspan="2">
 			<% url_rows.forEach(function(u) { %>
 			<p class="note-data">
-			  <a href="<%= u.url %>" ><%= u.title %></a>. <%= u.website_name %>. Accessed <%= u.accessed_at %>
+			  <a href="<%= u.url %>" ><%= markdown.toHTML(u.title) %></a>. <%= u.website_name %>. Accessed <%= u.accessed_at %>
 			 </p>
 			<% }); %>
 			</td>
