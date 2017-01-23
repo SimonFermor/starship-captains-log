@@ -72,8 +72,8 @@
 			<td class="table-title">References</td>
 			<td colspan="2">
 			<% url_rows.forEach(function(u) { %>
-			<p class="note-data">
-			  <a href="<%= u.url %>" ><%= markdown.toHTML(u.title) %></a>. <%= u.website_name %>. Accessed <%= u.accessed_at %>
+			<p class="note-data" id="references">
+			  <a href="<%= u.url %>" ><%= u.title %></a>. <%= u.website_name %>. Accessed <%= u.accessed_at %>
 			 </p>
 			<% }); %>
 			</td>
@@ -92,6 +92,7 @@
 	$('#edit_icon').toggle();
 	$('#new_icon').toggle();
 	$('.form-control').toggle();
+	$('#references').innerHTML = markdown.toHTML($('#references#').innerHTML());
 </script>
 
 </body>
