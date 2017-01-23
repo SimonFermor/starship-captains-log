@@ -109,11 +109,17 @@ app.get('/one_note', function(request, response) {
 		title: null, 
 		summary: null, 
 		note: null,
-		created_at: note_date.getFullYear() + '-' + note_date.getMonth() + '-' + note_date.getDate() + 'T21:02:10.000Z',
+		created_at: note_date.getFullYear() + '-' + note_date.getMonth() 
+			+ '-' + note_date.getDate() + 'T21:02:10.000Z',
 		last_updated_at: null
 		}];
 	var keyword_rows = [{}];
-	response.render('pages/one_note', {note_rows: note_rows, row_count: note_rows.length, keyword_rows: keyword_rows});
+	response.render('pages/one_note', 
+		{note_rows: note_rows, 
+		row_count: note_rows.length, 
+		keyword_rows: keyword_rows,
+		url_rows: url_rows}
+		);
 });
 
 // Save new note or changes
