@@ -42,12 +42,11 @@
 		<tr>
 			<td class="table-title">Summary:</td>
 			<td colspan="2">
-				<div id="note_summary" style="padding: 6px 12px;">
+				<div id="summary" style="padding: 6px 12px;">
 					<%=note_rows[0].summary %>
 				</div>
 			</td>
 			<td>
-				<p class="note-data" id="note_summary_2"><%=note_rows[0].summary %></p>
 				<textarea name="note_summary_edit" type="text" class="form-control" placeholder="<brief summary>"
 					id="note_summary" value=""><%=note_rows[0].summary %></textarea>
 			</td>
@@ -70,7 +69,7 @@
 			</td>
 			<td>
 				<!-- Note edit box - shown for editing and contains markdown -->
-				<textarea class="form-control" id="edit_area" note_id="<%= note_rows[0].note_id %>"
+				<textarea class="form-control" id="note_edit" note_id="<%= note_rows[0].note_id %>"
 					oninput="this.editor.update()" rows="20" cols="60"><%- note_rows[0].note %></textarea>
 			</td>
 		</tr>
@@ -91,14 +90,15 @@
 
 <script>
 	// jQuery not yet loaded, so use plain JavaScript
-	new Editor(document.getElementById("edit_area"), document.getElementById("note"));
+	new Editor(document.getElementById("note_edit"), document.getElementById("note"));
+	new Editor(document.getElementById("summary_edit"), document.getElementById("summary"));
 	// Hide edit fields and navbar links
 	$('#edit_hint').toggle();
 	$('#edit_icon').toggle();
 	$('#new_icon').toggle();
 	$('.form-control').toggle();
 	//$('#references').innerHTML = markdown.toHTML($('#references').innerHTML());
-	$('#note_summary').innerHTML = markdown.toHTML($('#note_summary').innerHTML());
+	//$('#note_summary').innerHTML = markdown.toHTML($('#note_summary').innerHTML());
 </script>
 
 </body>
