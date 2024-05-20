@@ -1,6 +1,8 @@
 .env
 npm-debug.log
+package-lock.json
 password.txt
+
 config/
 node_modules/
 sql/
