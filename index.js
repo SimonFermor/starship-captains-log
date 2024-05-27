@@ -1,6 +1,6 @@
 var express = require('express');
 var markdown = require('markdown').markdown;
-// var favicon = require('favicon');
+//var favicon = require('favicon');
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
@@ -16,6 +16,7 @@ app.set('view engine', 'ejs');
 // Database connection
 var mysql = require('mysql');
 
+// Set database connection for production or local development
 if (app.get('port') !== 5000) {
 	var connection = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
 }
