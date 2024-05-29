@@ -2,7 +2,7 @@
   "name": "starship-captains-log",
   "description": "Starship Captain's Log",
   "main": "index.js",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "start": "node index.js"
   },
@@ -25,13 +25,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://git.heroku.com/starship-captains-log.git"
+    "url": "https://github.com/SimonFermor/starship-captains-log.git"
   },
   "keywords": [
     "arthur",
     "starship",
     "log"
   ],
-  "author": "simon-fermor",
+  "author": "SimonFermor",
   "license": "MIT"
 }

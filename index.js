@@ -18,7 +18,7 @@ var mysql = require('mysql');
 
 // Set database connection for production or local development
 if (app.get('port') !== 5000) {
-	var connection = mysql.createConnection(process.env.CLEARDB_DATABASE_URL);
+	var connection = mysql.createConnection(process.env.DATABASE_URL);
 }
 else {
 	const fs = require('fs');
@@ -46,6 +46,7 @@ var tomorrow = moment().add(1, 'days').format('YYYY-MM-DD');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use( bodyParser.urlencoded({ extended: true}) );
+// Alternatively use: app.use(express.json()); ?
 
 // Express helper functions
 app.locals.dateFormat = function(obj) { return moment(obj).format("dddd, MMMM Do"); };
@@ -91,7 +92,7 @@ var query_notes = function(callback) {
 
 // Show page with existing note
 app.get('/one_note/:note_id', function(request, response) {
-	query_note(request.param('note_id'), function(err, note_rows) {
+	query_note(request.params.note_id, function(err, note_rows) {
 		query_note_keywords(request.params.note_id, function(err, keyword_rows) {
 			query_note_urls(request.params.note_id, function(err, url_rows) {
 				response.render('pages/one_note',	
