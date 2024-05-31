@@ -1,7 +1,7 @@
 {
   "name": "Starship Captain's Log",
   "description": "A simple database app using mySQL and Node",
-  "repository": "https://git.heroku.com/starship-captains-log.git",
+  "repository": "https://github.com/SimonFermor/starship-captains-log.git",
   "logo": "http://starship-captains-log.herokuapp.com/node.svg",
   "keywords": ["arthur", "notes", "log"],
   "image": "heroku/nodejs"

@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express = require('express');
 var markdown = require('markdown').markdown;
 //var favicon = require('favicon');
@@ -21,15 +22,10 @@ if (app.get('port') !== 5000) {
 	var connection = mysql.createConnection(process.env.DATABASE_URL);
 }
 else {
-	const fs = require('fs');
-	var password = fs.readFileSync('password.txt').toString();
-	console.log(password);
-	console.log();
-
 	var connection = mysql.createConnection({
 		host: 'localhost',
 		user: 'root',
-		password: password,
+		password: process.env.PASSWORD,
 		database: 'test',
 		multiplestatements: true});
 }
